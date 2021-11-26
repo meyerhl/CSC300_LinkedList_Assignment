@@ -1,0 +1,122 @@
+
+/**
+ * For Assignment 3, implement a linked list with functions for addFront,
+ * addEnd, removeFront, removeEnd, getAtIndex and dipslay. Use pseudo code
+ * from Wikipedia to get started.
+ *
+ */
+
+import java.io.*;
+import java.util.LinkedList;
+
+public class LinkedNumbers {
+    Node head; // head of list
+    Node tail; // tail of list
+ 
+    class Node {  // Linked list Node. Inner class static so main() can access it
+        int data;   // instantiates the data for each node
+        Node next;  //instantiates a standard "next" node
+        Node(int d)   //Constructor that maps what each Node shoud look like
+        {
+            data = d;   //the variable 'data' is initialized with an integer 'd'
+            next = null;  // the varialbe 'next' is initialized with a boolean 'null'
+        }
+    }
+ 
+    public void addFront(int addFrontData)
+    {
+        Node newNode = new Node(addFrontData);
+        newNode.next = head;
+        head = newNode;
+    }
+    public void addEnd(int addEndData) {
+        Node newNode = new Node(addEndData);
+        newNode.next = null;
+        
+        if(head == null) {
+           head = newNode; 
+        }
+        else {
+            Node last = head;
+            while (last.next != null) {
+                last = last.next;
+            }
+            last.next = newNode;
+        }
+    }
+    public void removeFront() {
+        if(head!= null) {
+            head = head.next;
+        }
+    }
+    public void removeEnd() {
+        Node temp = head;  //create temp variable with same address as head 
+        Node prevLast = null;   //create prevLast variable with value of null
+        while(temp.next != null) {   //while temp's next pointer is not null (i.e. not at end of list)
+            prevLast = temp;    // then prevLast variable now points to newest temp node
+            temp = temp.next;    // temp variable now moves to next node
+        }
+        prevLast.next = null;  //prevLast varialbe now assigns null to the node it is on
+    }
+    public void getAtIndex(int index) {
+        Node indexNode = head;
+        int counter = 0;
+    
+        while (counter <= index) {
+        if (counter == index) {
+            System.out.print("Index of " + index + " has node of " + indexNode.data + "\n");
+        }
+        counter++;
+        indexNode = indexNode.next;
+        }
+    }
+ 
+    public void displayList()
+    {
+        Node tnode = head;
+        while (tnode != null) {
+            System.out.print(tnode.data + " ");
+            tnode = tnode.next;  //this is the link to the next item (next pointer)
+        }
+    }
+ 
+    public static void main(String[] args)
+    {
+        LinkedNumbers llist = new LinkedNumbers();  //empty linked list
+        
+        System.out.println("Initial Linked List contents:");
+        llist.displayList();
+        
+        System.out.println("\nLined list after inserting at head:");
+        llist.addFront(98);
+        llist.addFront(45);
+        llist.addFront(7);
+        llist.addFront(25);
+        llist.displayList();
+        System.out.println();
+        
+        System.out.println("\nLinked List after inserting at tail:");
+        llist.addEnd(3);
+        llist.addEnd(2);
+        llist.addEnd(11);
+        llist.addEnd(15);
+        llist.addEnd(8);
+        llist.displayList();
+        System.out.println();
+        
+        System.out.println("\nLinked List after deleting head node:");
+        llist.removeFront();
+        llist.displayList();
+        System.out.println();
+        
+        System.out.println("\nLinked List after deleting tail node:");
+        llist.removeEnd();
+        llist.displayList();
+        System.out.println();
+        
+        System.out.println("\nGet node value at a certain index of Linked List:");
+        llist.getAtIndex(0);
+        llist.getAtIndex(4);
+        llist.getAtIndex(6);
+    }
+}
