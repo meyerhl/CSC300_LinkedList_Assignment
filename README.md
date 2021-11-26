@@ -1,2 +1,6 @@
 # CSC300_LinkedList_Assignment
-test
+
+Please view the LinkedNumbers_File for programming code.
+
+The purpose of this project was to implement a linked list with functions for addFront, addEnd,
+removeFront, removeEnd, getAtIndex, and display. This sample uses integers.
